@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="title_activity_login">Bejelentkezés</string><string name="title_activity_ufelhasznalo">Új felhasználó</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">felhasználónév</string>
+    <string name="prompt_password">Jelszó</string>
+    <string name="action_letrehoz"><b>Sign in</b>Létrehoz</string>
+    <string name="action_sign_in_short">Bejelentkezés</string>
+    <string name="menu_forgot_password">Recover lost password</string>
+    <string name="login_progress_signing_in">Bejelentkezés…</string>
+    <string name="error_invalid_email">Nincs ilyen felhasználó!</string>
+    <string name="error_invalid_password">Túl rövid jelszó!</string>
+    <string name="error_incorrect_password">Nem jó jelszó!</string>
+    <string name="error_field_required">Kötelező mező</string>
+    <string name="error_jelszo_nem_egyezik">A jelszavak nem egyeznek meg!</string>
+    <string name="error_van_mar">Van már ilyen nevű felhasználó!</string>
+    
+    <string name="felhasz_letre">Felhasználó létrehozása</string>
+
+</resources>

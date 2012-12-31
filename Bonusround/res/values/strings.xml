@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bonusround</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="username">username</string>
+
+    <string-array name="fomenu">
+        <item>BonusRound</item>
+        <item>Vételezés</item>
+        <item>Standolás</item>
+        <item>Információk</item>
+        <item>Karbantartás</item>
+    </string-array>
+
+    <string name="title_activity_uj_felhasznalo">Új Felhasználó</string>
+
+</resources>
