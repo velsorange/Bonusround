@@ -49,8 +49,9 @@ public final class R {
         public static final int error_invalid_email=0x7f04000d;
         public static final int error_invalid_password=0x7f04000e;
         public static final int error_jelszo_nem_egyezik=0x7f040011;
+        public static final int error_login=0x7f040013;
         public static final int error_van_mar=0x7f040012;
-        public static final int felhasz_letre=0x7f040013;
+        public static final int felhasz_letre=0x7f040014;
         public static final int hello_world=0x7f040001;
         public static final int login_progress_signing_in=0x7f04000c;
         public static final int menu_forgot_password=0x7f04000b;

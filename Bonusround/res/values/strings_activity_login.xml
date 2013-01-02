@@ -15,7 +15,7 @@
     <string name="error_field_required">Kötelező mező</string>
     <string name="error_jelszo_nem_egyezik">A jelszavak nem egyeznek meg!</string>
     <string name="error_van_mar">Van már ilyen nevű felhasználó!</string>
-    
+    <string name="error_login">A felhasználónév/jelszó nem egyezik...</string>
     <string name="felhasz_letre">Felhasználó létrehozása</string>
 
 </resources>

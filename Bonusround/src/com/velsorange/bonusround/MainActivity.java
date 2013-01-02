@@ -5,6 +5,9 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -23,6 +26,19 @@ public class MainActivity extends ListActivity {
 	public static String fejlec = "Üdvözletem:)";
 	public String[] values;
 	public boolean oarcbor;
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+
+	    oarcbor=true;
+	    // Checks the orientation of the screen
+	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+	        Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+	        Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+	    }
+	}
 	protected void onResume() {
 		super.onResume();
 		if (!oarcbor){
@@ -94,15 +110,17 @@ public class MainActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.activity_main);
 		// String fejlec ="nincs";
-
+		
 	}
 
+	
 	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-	}
-
+    protected void onDestroy() {
+		oarcbor=true;
+        super.onDestroy();
+        
+    } 
+	
 	int j = 10;
 
 	private void menu() {

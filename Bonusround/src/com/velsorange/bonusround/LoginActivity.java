@@ -230,7 +230,7 @@ public class LoginActivity extends Activity {
 								
 							}
 							mEmailView
-									.setError(getString(R.string.error_van_mar));
+									.setError(getString(R.string.error_login));
 							focusView = mEmailView;
 							cancel = true;
 						}
