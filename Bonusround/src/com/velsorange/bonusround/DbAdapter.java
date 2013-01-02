@@ -798,7 +798,7 @@ public class DbAdapter {
 	public Cursor osszFelhasznalok()
 	{
 		Cursor c = null;
-		c=mDb.query(TABLA_FELHASZNALO,new String[] {FELHASZNALO_KEY_ROWID,FELHASZNALO_KEY_NEV,FELHASZNALO_KEY_P},null,null,null,null,null);
+		c=mDb.query(TABLA_FELHASZNALO,new String[] {FELHASZNALO_KEY_ROWID,FELHASZNALO_KEY_NEV,FELHASZNALO_KEY_P,FELHASZNALO_KEY_ADMIN},null,null,null,null,null);
 		return c;
 	}
 	

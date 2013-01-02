@@ -22,10 +22,18 @@ public class MainActivity extends ListActivity {
 	public static DbAdapter dbHelper;
 	public static String fejlec = "Üdvözletem:)";
 	public String[] values;
-
+	public boolean oarcbor;
 	protected void onResume() {
 		super.onResume();
-
+		if (!oarcbor){
+		//kívûrõl érkezünk
+			nev="Nincs bejelentkezve";
+			admin="false";
+			fejlec="Üdvözletem:)";
+			
+			
+		} else {}
+		oarcbor=false;
 		menu();
 		Log.d("menu futása", "onResume-ben után");
 		if (admin.compareTo("true") == 0) {
@@ -37,6 +45,8 @@ public class MainActivity extends ListActivity {
 		} else if (nev == "Nincs felhasználó") {
 			values = new String[] { "Új felhasználó", "Kilépés" };
 
+		} else if (admin.compareTo("false")==0){
+			values = new String[] { "Bónuszkör", "Vételezés", "Standolás"};
 		}
 
 		if (values == null) {
@@ -51,9 +61,6 @@ public class MainActivity extends ListActivity {
 			listView.setOnItemClickListener(new OnItemClickListener() {
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long i) {
-					// Intent i = new
-					// Intent(ClassName.this,CourtDetailActivity.class);
-					// startActivity(i);
 					menuValaszt(position);
 				}
 			});
@@ -103,29 +110,26 @@ public class MainActivity extends ListActivity {
 		dbHelper = new DbAdapter(this);
 		dbHelper.open();
 		if ((dbHelper.osszFelhasznalok().getCount() > 0)
-				&& (fejlec.compareTo("Üdvözletem:)") == 0) && nev.isEmpty()) {
+				&& (fejlec.compareTo("Üdvözletem:)") == 0) && (nev.isEmpty() ||
+				nev.compareTo("Nincs bejelentkezve")==0)) {
 			this.setTitle("Nincs bejelentkezve");
 			Intent intent = new Intent(getBaseContext(), LoginActivity.class);
 			startActivityForResult(intent, 3);
 		} else if ((dbHelper.osszFelhasznalok().getCount() == 0)
-				&& (fejlec.compareTo("Üdvözletem:)") == 0)) {
+				) {
 			Log.d("mainactivity", "újfelhasznaló.class indít");
 			Intent intent = new Intent(getBaseContext(), UjFelhasznalo.class);
 
 			startActivityForResult(intent, 2);
 
-		} else {
-			if ((nev.compareTo("Nincs bejelentkezve") == 0)
-					&& (fejlec.compareTo("Üdvözletem:)") == 0)) {
-				this.setTitle("Nincs bejelentkezve");
-			} else
-				setTitle(nev);
-		}
+		}  else	setTitle(nev);
+	
 
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		oarcbor=true;
 		if (resultCode == RESULT_CANCELED) {
 
 		} else {

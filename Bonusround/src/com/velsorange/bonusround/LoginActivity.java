@@ -69,6 +69,18 @@ public class LoginActivity extends Activity {
 	    	nevertek="Nincs bejelentkezve";
 	    	adminertek="false";
 	    	rertek="mégsem";
+	    	intent=getIntent();
+	    	intent.putExtra(nev, nevertek);
+			intent.putExtra(admin, adminertek);
+			
+			if (getParent() == null) {
+			    setResult(Activity.RESULT_CANCELED, intent);
+			} else {
+			    getParent().setResult(Activity.RESULT_CANCELED, intent);
+			}
+			
+		    setResult(RESULT_CANCELED,intent);
+			//finish();
 	    }
 	    return super.onKeyDown(keyCode, event);
 	}
@@ -76,14 +88,11 @@ public class LoginActivity extends Activity {
 	protected void onPause() {
 	        
 	    
-	    intent=getIntent();
-	    intent.putExtra(nev, nevertek);
-	    intent.putExtra(admin, adminertek);
-	    
-	    setResult(0,intent);
-	    super.onPause();
+		
 	    showProgress(false);
-	    finish();
+	    super.onPause();
+	    
+	   
 	    
 	}
 	@Override
@@ -181,14 +190,14 @@ public class LoginActivity extends Activity {
 				if (c.moveToFirst()) {
 
 					do {
-						if (c.getString(c.getColumnIndex("nev")) == mEmail) {
+						if (mEmail.compareTo(c.getString(c.getColumnIndex("nev")))==0) {
 							b = true;
-							if (c.getString(c.getColumnIndex("p")) == mPassword) {
+							if (mPassword.compareTo(c.getString(c.getColumnIndex("p")))==0) {
 								// jó a pass így belép
 								
 								nevertek=mEmail;
 								//intent.putExtra("nev", mEmail);
-								if (c.getString(c.getColumnIndex("admin")) == "true") {
+								if (c.getString(c.getColumnIndex("admin")).compareTo("true")==0) {
 									adminertek="true";
 									//intent.putExtra("admin", "true");
 								} else {
@@ -197,7 +206,17 @@ public class LoginActivity extends Activity {
 								}
 								//rertek="siker";
 								//setResult(RESULT_OK, intent);
-							
+								intent=getIntent();
+								intent.putExtra(nev, nevertek);
+								intent.putExtra(admin, adminertek);
+								
+								if (getParent() == null) {
+								    setResult(Activity.RESULT_OK, intent);
+								} else {
+								    getParent().setResult(Activity.RESULT_OK, intent);
+								}
+								
+							    setResult(RESULT_OK,intent);
 								finish();
 
 							} else {
@@ -231,6 +250,7 @@ public class LoginActivity extends Activity {
 				} else {
 				}
 			}
+			showProgress(false);
 			
 
 		}
