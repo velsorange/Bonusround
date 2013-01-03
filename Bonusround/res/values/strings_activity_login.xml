@@ -3,7 +3,7 @@
     <string name="title_activity_login">Bejelentkezés</string><string name="title_activity_ufelhasznalo">Új felhasználó</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">felhasználónév</string>
+    <string name="prompt_email">Felhasználónév</string>
     <string name="prompt_password">Jelszó</string>
     <string name="action_letrehoz"><b>Sign in</b>Létrehoz</string>
     <string name="action_sign_in_short">Bejelentkezés</string>

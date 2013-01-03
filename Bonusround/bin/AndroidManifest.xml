@@ -16,24 +16,42 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.velsorange.bonusround.MainActivity"
-            android:label="@string/app_name"
-            android:configChanges="orientation|screenSize" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-				
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.velsorange.bonusround.LoginActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible"
-            android:configChanges="keyboardHidden|orientation">
+            android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
             android:name="com.velsorange.bonusround.UjFelhasznalo"
-            android:label="@string/title_activity_uj_felhasznalo"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_uj_felhasznalo" >
+        </activity>
+        <activity
+            android:name="com.velsorange.bonusround.ItemListActivity"
+            android:label="@string/title_item_list"
+            android:parentActivityName="com.velsorange.bonusround.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.velsorange.bonusround.MainActivity" />
+        </activity>
+        
+        <activity
+            android:name="com.velsorange.bonusround.KarbActivity"
+            android:label="@string/title_activity_karb"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName="com.velsorange.bonusround.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.velsorange.bonusround.MainActivity" />
         </activity>
     </application>
 

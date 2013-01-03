@@ -26,43 +26,48 @@ public final class R {
         public static final int login_status=0x7f080000;
         public static final int login_status_message=0x7f080001;
         public static final int loginj=0x7f080004;
-        public static final int menu_forgot_password=0x7f08000a;
-        public static final int menu_settings=0x7f08000b;
+        public static final int menu_forgot_password=0x7f08000b;
+        public static final int menu_settings=0x7f08000a;
         public static final int sign_in_button=0x7f080006;
     }
     public static final class layout {
-        public static final int activity_login=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_uj_felhasznalo=0x7f030002;
+        public static final int activity_karb=0x7f030000;
+        public static final int activity_login=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_uj_felhasznalo=0x7f030003;
     }
     public static final class menu {
-        public static final int activity_login=0x7f070000;
-        public static final int activity_main=0x7f070001;
-        public static final int activity_uj_felhasznalo=0x7f070002;
+        public static final int activity_karb=0x7f070000;
+        public static final int activity_login=0x7f070001;
+        public static final int activity_main=0x7f070002;
+        public static final int activity_uj_felhasznalo=0x7f070003;
     }
     public static final class string {
-        public static final int action_letrehoz=0x7f040009;
-        public static final int action_sign_in_short=0x7f04000a;
+        public static final int action_letrehoz=0x7f04000c;
+        public static final int action_sign_in_short=0x7f04000d;
         public static final int app_name=0x7f040000;
-        public static final int error_field_required=0x7f040010;
-        public static final int error_incorrect_password=0x7f04000f;
-        public static final int error_invalid_email=0x7f04000d;
-        public static final int error_invalid_password=0x7f04000e;
-        public static final int error_jelszo_nem_egyezik=0x7f040011;
-        public static final int error_login=0x7f040013;
-        public static final int error_van_mar=0x7f040012;
-        public static final int felhasz_letre=0x7f040014;
+        public static final int error_field_required=0x7f040013;
+        public static final int error_incorrect_password=0x7f040012;
+        public static final int error_invalid_email=0x7f040010;
+        public static final int error_invalid_password=0x7f040011;
+        public static final int error_jelszo_nem_egyezik=0x7f040014;
+        public static final int error_login=0x7f040016;
+        public static final int error_van_mar=0x7f040015;
+        public static final int felhasz_letre=0x7f040017;
         public static final int hello_world=0x7f040001;
-        public static final int login_progress_signing_in=0x7f04000c;
-        public static final int menu_forgot_password=0x7f04000b;
+        public static final int login_progress_signing_in=0x7f04000f;
+        public static final int menu_forgot_password=0x7f04000e;
         public static final int menu_settings=0x7f040002;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f040007;
-        public static final int prompt_password=0x7f040008;
-        public static final int title_activity_login=0x7f040005;
-        public static final int title_activity_ufelhasznalo=0x7f040006;
+        public static final int prompt_email=0x7f04000a;
+        public static final int prompt_password=0x7f04000b;
+        public static final int title_activity_karb=0x7f040007;
+        public static final int title_activity_login=0x7f040008;
+        public static final int title_activity_ufelhasznalo=0x7f040009;
         public static final int title_activity_uj_felhasznalo=0x7f040004;
+        public static final int title_item_detail=0x7f040005;
+        public static final int title_item_list=0x7f040006;
         public static final int username=0x7f040003;
     }
     public static final class style {

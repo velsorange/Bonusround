@@ -15,5 +15,8 @@
     </string-array>
 
     <string name="title_activity_uj_felhasznalo">Új Felhasználó</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_activity_karb">Karbantartás</string>
 
 </resources>

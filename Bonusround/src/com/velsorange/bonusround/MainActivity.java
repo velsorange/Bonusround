@@ -32,7 +32,6 @@ public class MainActivity extends ListActivity {
 	    super.onConfigurationChanged(newConfig);
 
 	    oarcbor=true;
-	    // Checks the orientation of the screen
 	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
 	        Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
 	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
@@ -53,8 +52,8 @@ public class MainActivity extends ListActivity {
 		menu();
 		Log.d("menu futása", "onResume-ben után");
 		if (admin.compareTo("true") == 0) {
-			values = new String[] { "Bónuszkör", "Vételezés", "Standolás",
-					"Információk", "Karbantartás" };
+			values = new String[] { "Bónuszkör", "Vételezés", "Standolás","Hitel",
+					"Költség","Információk", "Karbantartás","Kijelentkezés","Kilépés"};
 		} else if (nev == "Nincs bejelentkezve") {
 			values = new String[] { "Bejelenkezés", "Kilépés" };
 
@@ -62,7 +61,8 @@ public class MainActivity extends ListActivity {
 			values = new String[] { "Új felhasználó", "Kilépés" };
 
 		} else if (admin.compareTo("false")==0){
-			values = new String[] { "Bónuszkör", "Vételezés", "Standolás"};
+			values = new String[] { "Bónuszkör", "Vételezés", "Standolás","Hitel",
+					"Költség","Kijelentkezés","Kilépés"};
 		}
 
 		if (values == null) {
@@ -73,6 +73,7 @@ public class MainActivity extends ListActivity {
 					R.layout.activity_main, values));
 
 			ListView listView = getListView();
+			
 			listView.setTextFilterEnabled(true);
 			listView.setOnItemClickListener(new OnItemClickListener() {
 				public void onItemClick(AdapterView<?> parent, View view,
@@ -94,37 +95,69 @@ public class MainActivity extends ListActivity {
 				Intent intent = new Intent(getBaseContext(),
 						LoginActivity.class);
 				startActivityForResult(intent, 3);
+			} else if(values[0].toString().compareTo("Bónuszkör")==0){
+				
 			}
 			break;
 		case 1:
+			if(values[1].toString().compareTo("Vételezés")==0){
+			}
+			break;
+		case 2:
+			if(values[2].toString().compareTo("Standolás")==0){
+			}
+			break;
+		case 3:
+			if(values[3].toString().compareTo("Hitel")==0){
+			} 
+			break;
+		case 4:
+			if(values[4].toString().compareTo("Költség")==0){
+			} 
+			break;
+		case 5:
+			if(values[5].toString().compareTo("Információk")==0){
+				} else{
+					Intent intent = new Intent(getBaseContext(),
+							LoginActivity.class);
+					startActivityForResult(intent, 3);
+					Toast.makeText(this, "Sikeres kijelentkezés!", Toast.LENGTH_LONG).show();
+				}
+			break;
+		case 6:
+			if(values[6].toString().compareTo("Karbantartás")==0){
+				} else {
+					finish();
+					Toast.makeText(this, "Sikeres kilépés!", Toast.LENGTH_LONG).show();
+				}
+			break;
+		case 7:
+			Intent intent = new Intent(getBaseContext(),
+					LoginActivity.class);
+			startActivityForResult(intent, 3);
+			Toast.makeText(this, "Sikeres kijelentkezés!", Toast.LENGTH_LONG).show();
+		
+			break;
+		case 8:
 			finish();
-			onDestroy();
+			Toast.makeText(this, "Sikeres kilépés!", Toast.LENGTH_LONG).show();
 			break;
 		default:
 			break;
 		}
 	}
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.activity_main);
-		// String fejlec ="nincs";
-		
 	}
-
 	
 	@Override
     protected void onDestroy() {
-		oarcbor=true;
         super.onDestroy();
-        
     } 
 	
-	int j = 10;
-
 	private void menu() {
-
 		dbHelper = new DbAdapter(this);
 		dbHelper.open();
 		if ((dbHelper.osszFelhasznalok().getCount() > 0)
@@ -137,49 +170,33 @@ public class MainActivity extends ListActivity {
 				) {
 			Log.d("mainactivity", "újfelhasznaló.class indít");
 			Intent intent = new Intent(getBaseContext(), UjFelhasznalo.class);
-
 			startActivityForResult(intent, 2);
-
 		}  else	setTitle(nev);
-	
-
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		oarcbor=true;
 		if (resultCode == RESULT_CANCELED) {
-
 		} else {
 			if (requestCode == 2) {
 				Bundle MBuddle = data.getExtras();
 				nev = MBuddle.getString("nev");
 				admin = MBuddle.getString("admin");
 				fejlec = "";
-
 			}
 			if (requestCode == 3) {
 				Bundle MBuddle = data.getExtras();
-
 				nev = MBuddle.getString("nev");
 				admin = MBuddle.getString("admin");
 				fejlec = "";
-
 			}
 		}
-
-		
 	}
-
-	public void beUj() {
-
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-
 }

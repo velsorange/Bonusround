@@ -123,12 +123,15 @@ public class DbAdapter {
 	public static final String ELADAS_KEY_USER_ID = "user_id";
 	
 	//******************Hitel tábla*********************************//
+	//*újraírva, nincs a dbadapterben átírva
 	public static final String TABLA_HITEL = "hitel";
 	public static final String HITEL_KEY_ROWID = "_id";
 	public static final String HITEL_KEY_DATUM= "datum";
 	public static final String HITEL_KEY_OSSZEG = "osszeg";
 	public static final String HITEL_KEY_VENDEG_ID = "vendeg_id";
-	public static final String HITEL_KEY_USER_ID = "user_id";
+	public static final String HITEL_KEY_KIAD_USER_ID = "kiad_user_id";
+	public static final String HITEL_KEY_FIZET_USER_ID = "user_id";
+	public static final String HITEL_KEY_FIZETVE = "fizetve";
 	//******************Vendég tábla********************************//
 	public static final String TABLA_VENDEG = "vendeg";
 	public static final String VENDEG_KEY_ROWID = "_id";
@@ -303,7 +306,11 @@ public class DbAdapter {
 			+ HITEL_KEY_DATUM + " datetime, "
 			+ HITEL_KEY_OSSZEG + " text, "
 			+ HITEL_KEY_VENDEG_ID + " integer, "
-			+ HITEL_KEY_USER_ID + " integer);";
+			+ HITEL_KEY_KIAD_USER_ID + " integer, "
+			+ HITEL_KEY_FIZET_USER_ID + " integer, "
+			+ HITEL_KEY_FIZETVE + " text);";
+
+
 	public static final String DATABASE_CREATE_VENDEG = "CREATE TABLE if not exists "
 			+ TABLA_VENDEG + " (" 
 			+ VENDEG_KEY_ROWID + " integer PRIMARY KEY autoincrement, "
@@ -604,13 +611,17 @@ public class DbAdapter {
 				ertek.put(ELADAS_KEY_USER_ID, user_id);				
 				return mDb.insert(TABLA_ELADAS, null, ertek);
 			}
-	public long createHitel( Date datum, String osszeg, int vendeg_id, int user_id) {
+	public long createHitel( Date datum, String osszeg, int vendeg_id,
+			int kiad_user_id, int fizet_user_id, String fizetve) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
 		ContentValues ertek = new ContentValues();
 		ertek.put(HITEL_KEY_DATUM, dateFormat.format(datum));
 		ertek.put(HITEL_KEY_OSSZEG, osszeg);
 		ertek.put(HITEL_KEY_VENDEG_ID, vendeg_id);
-		ertek.put(HITEL_KEY_USER_ID, user_id);
+		ertek.put(HITEL_KEY_KIAD_USER_ID, kiad_user_id);
+		ertek.put(HITEL_KEY_FIZET_USER_ID, fizet_user_id);
+		ertek.put(HITEL_KEY_FIZETVE, fizetve);
+		
 		return mDb.insert(TABLA_HITEL, null, ertek);
 	}
 	public long createVendeg( String nev, String cim,String tel, String email, int user_id) {
