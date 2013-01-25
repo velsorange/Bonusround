@@ -1110,13 +1110,15 @@ public class DbAdapter {
 
 	public int getUserId(String user) {
 		Cursor mCursor = null;
-		mCursor = mDb.query(TABLA_MENU, new String[] { FELHASZNALO_KEY_ROWID,
+		mCursor = mDb.query(TABLA_FELHASZNALO, new String[] { FELHASZNALO_KEY_ROWID,
 				FELHASZNALO_KEY_NEV }, FELHASZNALO_KEY_NEV + " like '" + user
 				+ "'", null, null, null, null);
 		Log.w(TAG, mCursor.toString());
 		if (mCursor != null) {
+			if (mCursor.getCount()==0){}
+			else{
 			mCursor.moveToFirst();
-			return mCursor.getInt(0);
+			return mCursor.getInt(0);}
 		}
 		return 0;
 	}

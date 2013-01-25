@@ -23,19 +23,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ListActivity {
+	
+	private static Cursor c = null;
 	private static String nev = "";
 	private static String admin = "";
-	private static String vetelezes="";
-	private static String standolas="";
-	private static String koltseg="";
-	private static String bevetel="";
-	private static String informaciok="";
+	private static String vetelezes = "";
+	private static String standolas = "";
+	private static String koltseg = "";
+	private static String bevetel = "";
+	private static String informaciok = "";
 	public static DbAdapter dbHelper;
 	public static String fejlec = "Üdvözletem:)";
 	public String[] values;
 	public boolean oarcbor;
 	public static final int TABLET_MIN_DP_WEIGHT = 450;
 	private SimpleCursorAdapter dataAdapter;
+
 	protected static boolean isSmartphoneOrTablet(Activity act) {
 		DisplayMetrics metrics = new DisplayMetrics();
 		act.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -67,119 +70,85 @@ public class MainActivity extends ListActivity {
 
 	protected void onResume() {
 		super.onResume();
+
 		if (!oarcbor) {
 			// kívûrõl érkezünk
 			nev = "Nincs bejelentkezve";
 			admin = "false";
 			fejlec = "Üdvözletem:)";
-			vetelezes="false";
-			standolas="false";
-			koltseg="false";
-			bevetel="false";
-			informaciok="false";
-			
+			vetelezes = "false";
+			standolas = "false";
+			koltseg = "false";
+			bevetel = "false";
+			informaciok = "false";
+
 		} else {
 		}
 		oarcbor = false;
 		menu();
 		Log.d("menu futása", "onResume-ben után");
-		Cursor c = dbHelper.fetchFoMenu(dbHelper.getUserId(nev));
-		
-		
-/*		if (admin.compareTo("true") == 0) {
-			values = new String[] { "Bónuszkör", "Vételezés", "Standolás",
-					"Hitel", "Költség", "Bevétel", "Információk", 
-					"Karbantartás",	"Kijelentkezés", "Kilépés" };
-		} else if (nev == "Nincs bejelentkezve") {
-			values = new String[] { "Bejelenkezés", "Kilépés" };
 
-		} else if (nev == "Nincs felhasználó") {
-			values = new String[] { "Új felhasználó", "Kilépés" };
+		c = null;
+		if (dbHelper.getUserId(nev) == 0) {
+		} else {
+			c = dbHelper.fetchFoMenu(dbHelper.getUserId(nev));
+		}
 
-		} else if (admin.compareTo("false") == 0) {
-			String s="\"Bónuszkör\"";
-			int db=3;
-			if (vetelezes=="true"){
-				db++;
-			}
-			if (standolas=="true"){
-				db++;
-			}
-			db++;
-			if (koltseg=="true"){
-				db++;
-			}
-			if (bevetel=="true"){
-				db++;
-			}
-			if (informaciok=="true"){
-				db++;
-			}
-			values = new String[db];
-			values[0]="Bónuszkör";
-			values[db-1]="Kilépés";
-			values[db-2]="Kijelentkezés";
-			db=0;
-			if (vetelezes=="true"){
-				db++;
-				values[db]="Vételezés";
-			}
-			if (standolas=="true"){
-				db++;
-				values[db]="Standolás";
-			}
-			db++;
-			values[db]="Hitel";
-			if (koltseg=="true"){
-				db++;
-				values[db]="Költség";
-			}
-			if (bevetel=="true"){
-				db++;
-				values[db]="Bevétel";
-			}
-			if (informaciok=="true"){
-				db++;
-				values[db]="Információk";
-			}
-			
-		values = new String[] { "Bónuszkör", "Vételezés", "Standolás",
-					"Hitel", "Költség", "Kijelentkezés", "Kilépés" };
-		}*/
+		/*
+		 * if (admin.compareTo("true") == 0) { values = new String[] {
+		 * "Bónuszkör", "Vételezés", "Standolás", "Hitel", "Költség", "Bevétel",
+		 * "Információk", "Karbantartás", "Kijelentkezés", "Kilépés" }; } else
+		 * if (nev == "Nincs bejelentkezve") { values = new String[] {
+		 * "Bejelenkezés", "Kilépés" };
+		 * 
+		 * } else if (nev == "Nincs felhasználó") { values = new String[] {
+		 * "Új felhasználó", "Kilépés" };
+		 * 
+		 * } else if (admin.compareTo("false") == 0) { String s="\"Bónuszkör\"";
+		 * int db=3; if (vetelezes=="true"){ db++; } if (standolas=="true"){
+		 * db++; } db++; if (koltseg=="true"){ db++; } if (bevetel=="true"){
+		 * db++; } if (informaciok=="true"){ db++; } values = new String[db];
+		 * values[0]="Bónuszkör"; values[db-1]="Kilépés";
+		 * values[db-2]="Kijelentkezés"; db=0; if (vetelezes=="true"){ db++;
+		 * values[db]="Vételezés"; } if (standolas=="true"){ db++;
+		 * values[db]="Standolás"; } db++; values[db]="Hitel"; if
+		 * (koltseg=="true"){ db++; values[db]="Költség"; } if
+		 * (bevetel=="true"){ db++; values[db]="Bevétel"; } if
+		 * (informaciok=="true"){ db++; values[db]="Információk"; }
+		 * 
+		 * values = new String[] { "Bónuszkör", "Vételezés", "Standolás",
+		 * "Hitel", "Költség", "Kijelentkezés", "Kilépés" }; }
+		 */
 
 		if (c == null) {
 
 		} else {
 
-			String[] columns = new String[] {
-					dbHelper.MENU_KEY_ROWID,
-					dbHelper.MENU_KEY_MENU
-				  };
-				 
-				  // the XML defined views which the data will be bound to
-				  int[] to = new int[] { 
-				    R.id.userid,
-				    R.id.fomenu
-				  };
-				 
-				  // create the adapter using the cursor pointing to the desired data 
-				  //as well as the layout information
-				  dataAdapter = new SimpleCursorAdapter(
-				    this, R.layout.activity_main, 
-				    c, 
-				    columns, 
-				    to,
-				    0);
-				 
-				  ListView listView = (ListView) findViewById(R.id.listView1);
-				  // Assign adapter to ListView
-				  listView.setAdapter(dataAdapter);
-/*			setListAdapter(new ArrayAdapter<String>(this,
-					R.layout.activity_main, values));
+			String[] columns = new String[2];
+			columns[0] = dbHelper.MENU_KEY_ROWID;
+			columns[1] = dbHelper.MENU_KEY_MENU;
 
-			ListView listView = getListView();
-*/
-			listView.setTextFilterEnabled(true);
+			// the XML defined views which the data will be bound to
+			int[] to = new int[2];
+			to[0] = R.id.tablaid;
+			to[1] = R.id.fomenu;
+
+			// create the adapter using the cursor pointing to the desired data
+			// as well as the layout information
+			setContentView(R.layout.activity_main);
+			dataAdapter = new SimpleCursorAdapter(this, R.layout.fomenusor, c,
+					columns, to, 0);
+
+			ListView listView = (ListView) findViewById(android.R.id.list);
+			// Assign adapter to ListView
+			listView.setAdapter(dataAdapter);
+			/*
+			 * setListAdapter(new ArrayAdapter<String>(this,
+			 * R.layout.activity_main, values));
+			 * 
+			 * ListView listView = getListView();
+			 */
+			// listView.setTextFilterEnabled(true);
 			listView.setOnItemClickListener(new OnItemClickListener() {
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long i) {
@@ -190,84 +159,25 @@ public class MainActivity extends ListActivity {
 	}
 
 	public void menuValaszt(int i) {
-		switch (i) {
-		case 0:
-			if (nev == "Nincs felhasználó") {
-				Intent intent = new Intent(getBaseContext(),
-						UjFelhasznalo.class);
-				startActivityForResult(intent, 2);
-			} else if (nev == "Nincs bejelentkezve") {
-				Intent intent = new Intent(getBaseContext(),
-						LoginActivity.class);
-				startActivityForResult(intent, 3);
-			} else if (values[0].toString().compareTo("Bónuszkör") == 0) {
-				//bónuszkör
-			}
-			break;
-		case 1:
-			if (values[1].toString().compareTo("Vételezés") == 0) {
-			
-			}else if (values[1].toString().compareTo("Standolás") == 0) {
-				
-			} else if (values[1].toString().compareTo("Hitel") == 0) {
-					
-			}
-			break;
-		case 2:
-			if (values[2].toString().compareTo("Standolás") == 0) {
-			}
-			break;
-		case 3:
-			if (values[3].toString().compareTo("Hitel") == 0) {
-			}
-			break;
-		case 4:
-			if (values[4].toString().compareTo("Költség") == 0) {
-			}
-			break;
-		case 5:
-			if (values[5].toString().compareTo("Bevétel") == 0) {
-			} else {
-				Intent intent = new Intent(getBaseContext(),
-						LoginActivity.class);
-				startActivityForResult(intent, 3);
-				Toast.makeText(this, "Sikeres kijelentkezés!",
-						Toast.LENGTH_LONG).show();
-				}
-			break;
-		case 6:
-			if (values[5].toString().compareTo("Információk") == 0) {
-			} else {
+		c.moveToPosition(i);
+		String szoveg = c.getString(1);
+		if (szoveg.compareTo("Bónuszkör") == 0) {
 
-				finish();
-				Toast.makeText(this, "Sikeres kilépés!", Toast.LENGTH_LONG)
-						.show();
-			}
-			break;
-		case 7:
-			if (values[6].toString().compareTo("Karbantartás") == 0) {
-				if (isSmartphoneOrTablet(this)) {
-				
-					//teló
-				} else{
-					//tabi
-				}
-			} else {
-			}
-			break;
-		case 8:
+		} else if (szoveg.compareTo("Vételezés") == 0) {
+		} else if (szoveg.compareTo("Standolás") == 0) {
+		} else if (szoveg.compareTo("Hitel") == 0) {
+		} else if (szoveg.compareTo("Költség") == 0) {
+		} else if (szoveg.compareTo("Bevétel") == 0) {
+		} else if (szoveg.compareTo("Információk") == 0) {
+		} else if (szoveg.compareTo("Karbantartás") == 0) {
+		} else if (szoveg.compareTo("Kijelentkezés") == 0) {
 			Intent intent = new Intent(getBaseContext(), LoginActivity.class);
 			startActivityForResult(intent, 3);
 			Toast.makeText(this, "Sikeres kijelentkezés!", Toast.LENGTH_LONG)
 					.show();
-
-			break;
-		case 9:
+		} else if (szoveg.compareTo("Kilépés") == 0) {
 			finish();
 			Toast.makeText(this, "Sikeres kilépés!", Toast.LENGTH_LONG).show();
-			break;
-		default:
-			break;
 		}
 	}
 

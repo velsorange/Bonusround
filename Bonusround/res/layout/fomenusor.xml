@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="6dip" 
+    >
 
     <TextView
         android:id="@+id/fomenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+
         android:layout_centerHorizontal="true"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Large Text" />
 
     <TextView
-        android:id="@+id/userid"
+        android:id="@+id/tablaid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignParentLeft="true"
-        android:text="Small Text"
-        android:visibility="gone"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_alignParentTop="true"
+        
+        android:text="TextView"
+        android:visibility="invisible" />
 
 </RelativeLayout>
