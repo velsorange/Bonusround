@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -33,7 +35,7 @@ public class MainActivity extends ListActivity {
 	public String[] values;
 	public boolean oarcbor;
 	public static final int TABLET_MIN_DP_WEIGHT = 450;
-
+	private SimpleCursorAdapter dataAdapter;
 	protected static boolean isSmartphoneOrTablet(Activity act) {
 		DisplayMetrics metrics = new DisplayMetrics();
 		act.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -81,7 +83,7 @@ public class MainActivity extends ListActivity {
 		oarcbor = false;
 		menu();
 		Log.d("menu futása", "onResume-ben után");
-		dbHelper.fetchFoMenu(dbHelper.getUserId(nev));
+		Cursor c = dbHelper.fetchFoMenu(dbHelper.getUserId(nev));
 		
 		
 /*		if (admin.compareTo("true") == 0) {
@@ -145,15 +147,38 @@ public class MainActivity extends ListActivity {
 					"Hitel", "Költség", "Kijelentkezés", "Kilépés" };
 		}*/
 
-		if (values == null) {
+		if (c == null) {
 
 		} else {
 
-			setListAdapter(new ArrayAdapter<String>(this,
+			String[] columns = new String[] {
+					dbHelper.MENU_KEY_ROWID,
+					dbHelper.MENU_KEY_MENU
+				  };
+				 
+				  // the XML defined views which the data will be bound to
+				  int[] to = new int[] { 
+				    R.id.userid,
+				    R.id.fomenu
+				  };
+				 
+				  // create the adapter using the cursor pointing to the desired data 
+				  //as well as the layout information
+				  dataAdapter = new SimpleCursorAdapter(
+				    this, R.layout.activity_main, 
+				    c, 
+				    columns, 
+				    to,
+				    0);
+				 
+				  ListView listView = (ListView) findViewById(R.id.listView1);
+				  // Assign adapter to ListView
+				  listView.setAdapter(dataAdapter);
+/*			setListAdapter(new ArrayAdapter<String>(this,
 					R.layout.activity_main, values));
 
 			ListView listView = getListView();
-
+*/
 			listView.setTextFilterEnabled(true);
 			listView.setOnItemClickListener(new OnItemClickListener() {
 				public void onItemClick(AdapterView<?> parent, View view,
