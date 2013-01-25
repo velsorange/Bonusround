@@ -56,8 +56,6 @@ public class UjFelhasznalo extends Activity {
 	public static int db = 0;
 	public static Boolean jo = false;
 
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
 
 	/**
 	 * The default email to populate the email field with.
@@ -322,6 +320,7 @@ public class UjFelhasznalo extends Activity {
 	 */
 	public Boolean UserCreate(String s, int i) {
 		MainActivity.dbHelper.createFelhasznalo(mEmail, mPassword, s, i);
+		MainActivity.dbHelper.createMenuRendszer(MainActivity.dbHelper.getUserId(mEmail));
 		return true;
 	}
 }
