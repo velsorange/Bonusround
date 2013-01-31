@@ -56,22 +56,22 @@ public class DbAdapter {
 	public static final String BESZERZESIAR_KEY_USER_ID = "user_id";
 	// ******************Vételezés tábla************************//
 	public static final String TABLA_VETELEZES = "vetelezes";
-	public static final String VETELEZES_KEY_ROWID = "_id";
-	public static final String VETELEZES_KEY_BEAR_ID = "bear_id";
-	public static final String VETELEZES_KEY_DATUM = "datum";
-	public static final String VETELEZES_KEY_SZAMLA_ID = "szamla_id";
-	public static final String VETELEZES_KEY_MENNYISEG = "mennyiseg";
-	public static final String VETELEZES_KEY_USER_ID = "user_id";
-	public static final String VETELEZES_KEY_SS_ID = "ss_id";
+	public static final String VETELEZES_KEY_ROWID = "_id";//crypt
+	public static final String VETELEZES_KEY_BEAR_ID = "bear_id";//crypt
+	public static final String VETELEZES_KEY_DATUM = "datum";//crypt
+	public static final String VETELEZES_KEY_SZAMLA_ID = "szamla_id";//crypt
+	public static final String VETELEZES_KEY_MENNYISEG = "mennyiseg";//crypt
+	public static final String VETELEZES_KEY_USER_ID = "user_id";//crypt
+	public static final String VETELEZES_KEY_SS_ID = "ss_id";//crypt
 	// ******************Szamla tabla***************************//
 	public static final String TABLA_SZAMLA = "szamla";
-	public static final String SZAMLA_KEY_ROWID = "_id";
-	public static final String SZAMLA_KEY_SZALLITO_ID = "szallito_id";
-	public static final String SZAMLA_KEY_DATUM = "datum";
-	public static final String SZAMLA_KEY_M = "m";
-	public static final String SZAMLA_KEY_NETTO_OSSZEG = "netto_osszeg";
-	public static final String SZAMLA_KEY_BRUTTO_OSSZEG = "brutto_osszeg";
-	public static final String SZAMLA_KEY_USER_ID = "user_id";
+	public static final String SZAMLA_KEY_ROWID = "_id";//crypt
+	public static final String SZAMLA_KEY_SZALLITO_ID = "szallito_id";//crypt
+	public static final String SZAMLA_KEY_DATUM = "datum";//crypt
+	public static final String SZAMLA_KEY_M = "m";//crypt
+	public static final String SZAMLA_KEY_NETTO_OSSZEG = "netto_osszeg";//crypt
+	public static final String SZAMLA_KEY_BRUTTO_OSSZEG = "brutto_osszeg";//crypt
+	public static final String SZAMLA_KEY_USER_ID = "user_id";//crypt
 	// ******************Szallito tábla*************************//
 	public static final String TABLA_SZALLITO = "szallito";
 	public static final String SZALLITO_KEY_ROWID = "_id";

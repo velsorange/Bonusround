@@ -33,6 +33,7 @@ public class MainActivity extends ListActivity {
 	private static String bevetel = "";
 	private static String informaciok = "";
 	public static DbAdapter dbHelper;
+	
 	public static String fejlec = "Üdvözletem:)";
 	public String[] values;
 	public boolean oarcbor;
@@ -170,6 +171,13 @@ public class MainActivity extends ListActivity {
 		} else if (szoveg.compareTo("Bevétel") == 0) {
 		} else if (szoveg.compareTo("Információk") == 0) {
 		} else if (szoveg.compareTo("Karbantartás") == 0) {
+			Intent intent = new Intent(getBaseContext(), Karbantartas.class);
+			Bundle b = new Bundle();
+			b.putString("nev", nev);
+			intent.putExtras(b);
+			startActivityForResult(intent, 4);
+			Toast.makeText(this, "Karbantartás", Toast.LENGTH_LONG)
+					.show();
 		} else if (szoveg.compareTo("Kijelentkezés") == 0) {
 			Intent intent = new Intent(getBaseContext(), LoginActivity.class);
 			startActivityForResult(intent, 3);
@@ -184,6 +192,8 @@ public class MainActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		dbHelper = new DbAdapter(this);
+		dbHelper.open();
 	}
 
 	@Override
@@ -192,8 +202,8 @@ public class MainActivity extends ListActivity {
 	}
 
 	private void menu() {
-		dbHelper = new DbAdapter(this);
-		dbHelper.open();
+		//dbHelper = new DbAdapter(this);
+		//dbHelper.open();
 		if ((dbHelper.osszFelhasznalok().getCount() > 0)
 				&& (fejlec.compareTo("Üdvözletem:)") == 0)
 				&& (nev.isEmpty() || nev.compareTo("Nincs bejelentkezve") == 0)) {
@@ -223,6 +233,11 @@ public class MainActivity extends ListActivity {
 				Bundle MBuddle = data.getExtras();
 				nev = MBuddle.getString("nev");
 				admin = MBuddle.getString("admin");
+				fejlec = "";
+			}
+			if (requestCode == 4) {
+				Bundle MBuddle = data.getExtras();
+				nev = MBuddle.getString("nev");
 				fejlec = "";
 			}
 		}

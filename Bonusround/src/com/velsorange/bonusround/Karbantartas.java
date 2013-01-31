@@ -1,5 +1,8 @@
 package com.velsorange.bonusround;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -7,16 +10,59 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Karbantartas extends FragmentActivity {
+	Intent intent = getIntent();
+	String nev = "";
+	public boolean oarcbor;
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
 
+		oarcbor = true;
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+		} else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+			Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (!oarcbor) {
+			// kívûrõl érkezünk
+			nev = "";
+			Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+			startActivityForResult(intent, 3);
+		} else {
+		}
+		oarcbor = false;
+		
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		oarcbor = true;
+		if (resultCode == RESULT_CANCELED) {
+		} else {
+			if (requestCode == 3) {
+				Bundle MBuddle = data.getExtras();
+				nev = MBuddle.getString("nev");
+				setTitle(nev);
+			}
+		}
+	}
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -26,7 +72,27 @@ public class Karbantartas extends FragmentActivity {
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
-
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+	    if ((keyCode == KeyEvent.KEYCODE_BACK))
+	    {
+	    
+	    	intent=getIntent();
+	    	intent.putExtra("nev", nev);
+			
+			
+			if (getParent() == null) {
+			    setResult(Activity.RESULT_OK, intent);
+			} else {
+			    getParent().setResult(Activity.RESULT_OK, intent);
+			}
+			
+		    setResult(RESULT_OK,intent);
+			//finish();
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
@@ -36,7 +102,15 @@ public class Karbantartas extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_karbantartas);
-
+		Bundle extras = this.getIntent().getExtras();
+	//    nev = extras.getString("nev");
+	    if (extras!=null){
+	    	nev = extras.getString("nev");
+	    	setTitle(nev);
+	    	oarcbor=true;
+		    }
+		//nev=savedInstanceState.getBundle(nev).toString();
+		//setTitle(nev);
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
