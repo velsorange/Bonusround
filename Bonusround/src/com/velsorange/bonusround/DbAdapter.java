@@ -152,10 +152,10 @@ public class DbAdapter {
 	public static final String KTG_T_KEY_ROWID = "_id";
 	public static final String KTG_T_KEY_MEGNEVEZES = "megnevezes";
 	public static final String KTG_T_KEY_TIPUS = "tipus";
-	public static final String KTG_T_KEY_KAPCS_ID = "kapcs_id";
+	public static final String KTG_T_KEY_KAPCS_ID = "kapcs_id";//???
 	public static final String KTG_T_KEY_NE = "netto";
 	public static final String KTG_T_KEY_BR = "brutto";
-	public static final String KTG_T_KEY_TAG = "tag";
+	public static final String KTG_T_KEY_TAG = "tag";//számolós?
 	public static final String KTG_T_KEY_USER_ID = "user_id";
 	// ******************Felhasználó tábla*******************************//
 	public static final String TABLA_FELHASZNALO = "felhasznalo";
@@ -202,7 +202,7 @@ public class DbAdapter {
 	public static final String MARADVANY_KEY_ARU_ID = "aru_id";
 	public static final String MARADVANY_KEY_SS_ID = "ss_id";
 	public static final String MARADVANY_KEY_MENNYISEG = "mennyiseg";
-	// ******************Egyéb Bevétel tábla*******************************//
+	// ******************Egyéb Bevétel tábla nincs kész tip id-t bele kell tenni*******************************//
 	public static final String TABLA_EGYEB_BEVETEL = "egyeb_bevetel";
 	public static final String EGYEB_BEVETEL_KEY_ROWID = "_id";
 	public static final String EGYEB_BEVETEL_KEY_MEGNEVEZES = "megnevezes";
@@ -211,6 +211,10 @@ public class DbAdapter {
 	public static final String EGYEB_BEVETEL_KEY_DATUM = "datum";
 	public static final String EGYEB_BEVETEL_KEY_USER_ID = "user_id";
 	public static final String EGYEB_BEVETEL_KEY_SZAMOL = "szamol";
+	// ******************Egyéb Bevétel  tips tábla nincs kész semmije*******************************//
+		public static final String TABLA_EGYEB_BEVETEL_T = "egyeb_bevetel_t";
+		public static final String EGYEB_BEVETEL_T_KEY_ROWID = "_id";
+		
 	// ******************Menü tábla*******************************//
 	public static final String TABLA_MENU = "menu";
 	public static final String MENU_KEY_ROWID = "_id";
@@ -468,7 +472,6 @@ public class DbAdapter {
 			+ " text, "
 			+ KTG_T_KEY_USER_ID
 			+ " integer);";
-
 	public static final String DATABASE_CREATE_FELHASZNALO = "CREATE TABLE if not exists "
 			+ TABLA_FELHASZNALO
 			+ " ("

@@ -49,12 +49,23 @@ public class Karbantartas extends FragmentActivity {
 		} else {
 		}
 		oarcbor = false;
-		
+		menu();
+	}
+	private void menu() {
+		//dbHelper = new DbAdapter(this);
+		//dbHelper.open();
+		if (nev.compareTo("")==0){
+			this.setTitle("Nincs bejelentkezve");
+			Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+			startActivityForResult(intent, 3);
+		} else
+			setTitle(nev);
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		oarcbor = true;
 		if (resultCode == RESULT_CANCELED) {
+			nev="";
 		} else {
 			if (requestCode == 3) {
 				Bundle MBuddle = data.getExtras();
@@ -154,7 +165,7 @@ public class Karbantartas extends FragmentActivity {
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 3;
+			return 7;
 		}
 
 		@Override
@@ -175,6 +186,18 @@ public class Karbantartas extends FragmentActivity {
 	 * A dummy fragment representing a section of the app, but that simply
 	 * displays dummy text.
 	 */
+	/*-	ARUT);
+	 - ARU);
+	    ELADASIAR);
+		AE);
+	-SZALLITO);
+		BESZERZESIAR);
+	-VENDEG);
+	-KTG_T);
+	-FELHASZNALO);
+	-EGYEB_BEVETEL_tipua);
+	*/
+
 	public static class DummySectionFragment extends Fragment {
 		/**
 		 * The fragment argument representing the section number for this
@@ -184,7 +207,6 @@ public class Karbantartas extends FragmentActivity {
 
 		public DummySectionFragment() {
 		}
-
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {

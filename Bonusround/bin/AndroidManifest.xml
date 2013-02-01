@@ -26,13 +26,13 @@
         </activity>
         <activity
             android:name="com.velsorange.bonusround.LoginActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
             android:name="com.velsorange.bonusround.UjFelhasznalo"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_uj_felhasznalo" >
         </activity>
         <activity
@@ -54,6 +54,8 @@
         </activity>
         <activity
             android:name="com.velsorange.bonusround.Karbantartas"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            
             android:label="@string/title_activity_karbartartas" >
         </activity>
     </application>
