@@ -171,13 +171,14 @@ public class MainActivity extends ListActivity {
 		} else if (szoveg.compareTo("Bevétel") == 0) {
 		} else if (szoveg.compareTo("Információk") == 0) {
 		} else if (szoveg.compareTo("Karbantartás") == 0) {
+			if (isSmartphoneOrTablet(this)){
 			Intent intent = new Intent(getBaseContext(), Karbantartas.class);
 			Bundle b = new Bundle();
 			b.putString("nev", nev);
 			intent.putExtras(b);
 			startActivityForResult(intent, 4);
 			Toast.makeText(this, "Karbantartás", Toast.LENGTH_LONG)
-					.show();
+					.show();}
 		} else if (szoveg.compareTo("Kijelentkezés") == 0) {
 			Intent intent = new Intent(getBaseContext(), LoginActivity.class);
 			startActivityForResult(intent, 3);

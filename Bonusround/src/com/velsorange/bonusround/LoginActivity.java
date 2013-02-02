@@ -45,7 +45,7 @@ public class LoginActivity extends FragmentActivity implements
 	String adminertek = "";
 	int result;
 	private String s;
-	private String key;
+	private String key="";
 
 	private void showEditDialog() {
 		FragmentManager fm = getSupportFragmentManager();
@@ -64,7 +64,8 @@ public class LoginActivity extends FragmentActivity implements
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		showEditDialog();
+		if (key.compareTo("")==0){
+		showEditDialog();}
 	}
 
 	@Override
@@ -72,6 +73,7 @@ public class LoginActivity extends FragmentActivity implements
 			throws InvalidKeyException, NoSuchAlgorithmException,
 			NoSuchPaddingException, IOException {
 		if (inputText.length() == 0) {
+			showEditDialog();
 			Toast.makeText(this, "nincs", Toast.LENGTH_LONG).show();
 		} else {
 			key = inputText;
@@ -118,7 +120,7 @@ public class LoginActivity extends FragmentActivity implements
 			intent = getIntent();
 			intent.putExtra(nev, nevertek);
 			intent.putExtra(admin, adminertek);
-
+			intent.putExtra("key", key);
 			if (getParent() == null) {
 				setResult(Activity.RESULT_CANCELED, intent);
 			} else {
@@ -272,6 +274,8 @@ public class LoginActivity extends FragmentActivity implements
 										this,
 										"A felhasználónév és/vagy a jelszó nem egyezik",
 										Toast.LENGTH_LONG).show();
+								mEmailView
+								.setError(getString(R.string.error_login));
 								mEmailView.setText("");
 								mPasswordView.setText("");
 								mEmailView.requestFocus();
@@ -286,6 +290,8 @@ public class LoginActivity extends FragmentActivity implements
 					} while (c.moveToNext());
 					if (!b) {
 
+						mEmailView
+						.setError(getString(R.string.error_login));
 						Toast.makeText(
 								this,
 								"A felhasználónév és/vagy a jelszó nem egyezik",

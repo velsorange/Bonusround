@@ -18,6 +18,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -155,11 +158,21 @@ public class Karbantartas extends FragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
+			switch(position){
+			case 0:
+				Fragment fragment = new AruT();
+				Bundle args = new Bundle();
+				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+				fragment.setArguments(args);
+				return fragment;
+			default:
+
+				Fragment fragment1 = new DummySectionFragment();
+				Bundle args1 = new Bundle();
+				args1.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+				fragment1.setArguments(args1);
+				return fragment1;
+			}
 		}
 
 		@Override
@@ -198,6 +211,31 @@ public class Karbantartas extends FragmentActivity {
 	-EGYEB_BEVETEL_tipua);
 	*/
 
+	public static class AruT extends Fragment {
+		/**
+		 * The fragment argument representing the section number for this
+		 * fragment.
+		 */
+		public static final String ARG_SECTION_NUMBER = "section_number";
+
+		public AruT() {
+		}
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			// Create a new TextView and set its text to the fragment's section
+			// number argument value.
+			View V = inflater.inflate(R.layout.karban_arut, container, false);
+			ListView listView = (ListView) V.findViewById(R.id.karutlist);
+			ImageButton fel = (ImageButton) V.findViewById(R.id.karutfel);
+			ImageButton le = (ImageButton) V.findViewById(R.id.karutle);
+			ImageButton uj = (ImageButton) V.findViewById(R.id.karutuj);
+			
+			ImageButton ment = (ImageButton) V.findViewById(R.id.karutment);
+			EditText szoveg =(EditText)V.findViewById(R.id.karutszoveg);
+			return V;
+		}
+	}
 	public static class DummySectionFragment extends Fragment {
 		/**
 		 * The fragment argument representing the section number for this

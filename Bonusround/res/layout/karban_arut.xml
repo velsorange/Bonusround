@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/widget0"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/karutszoveg"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:layout_x="0dp"
+            android:layout_y="10dp"
+            android:ems="10"
+            android:hint="Áru típus"
+            android:singleLine="true"
+            android:textSize="18sp" >
+        </EditText>
+    
+
+        
+
+        <ImageButton
+            android:id="@+id/karutfel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="206dp"
+            android:layout_y="111dp"
+            android:src="@drawable/fel" />
+
+        <ImageButton
+            android:id="@+id/karutle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="206dp"
+            android:layout_y="162dp"
+            android:src="@drawable/le" />
+
+        <ListView
+            android:id="@+id/karutlist"
+            android:layout_width="196dp"
+            android:layout_height="300dp"
+            android:layout_x="4dp"
+            android:layout_y="97dp" >
+        </ListView>
+
+        <ImageButton
+            android:id="@+id/karutment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="204dp"
+            android:layout_y="50dp"
+            android:src="@drawable/ment" />
+
+        <ImageButton
+            android:id="@+id/karutuj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="260dp"
+            android:layout_y="52dp"
+            android:src="@drawable/uj" />
+
+        <Spinner
+            android:id="@+id/kiszereles"
+            android:layout_width="106dp"
+            android:layout_height="42dp"
+            android:layout_x="200dp"
+            android:layout_y="4dp" />
+
+        <CheckBox
+            android:id="@+id/lathato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="6dp"
+            android:layout_y="49dp"
+            android:text="Látható" />
+
+        <Switch
+            android:id="@+id/lathatok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="4dp"
+            android:layout_y="407dp"
+            android:text="Látható" />
+
+    </AbsoluteLayout>

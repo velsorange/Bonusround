@@ -25,7 +25,19 @@ import android.widget.TextView.OnEditorActionListener;
 
 public class EditNameDialog extends DialogFragment implements OnEditorActionListener {
 
-    public interface EditNameDialogListener {
+    @Override
+	public boolean isCancelable() {
+		// TODO Auto-generated method stub
+		return super.isCancelable();
+	}
+
+	@Override
+	public void setCancelable(boolean cancelable) {
+		// TODO Auto-generated method stub
+		super.setCancelable(cancelable);
+	}
+
+	public interface EditNameDialogListener {
         void onFinishEditDialog(String inputText) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IOException;
     }
 
@@ -42,6 +54,7 @@ public class EditNameDialog extends DialogFragment implements OnEditorActionList
         mEditText = (EditText) view.findViewById(R.id.txt_your_name);
         gomb = (Button) view.findViewById(R.id.gomb);
         getDialog().setTitle("Hello");
+        setCancelable(false);
 
         // Show soft keyboard automatically
         mEditText.requestFocus();

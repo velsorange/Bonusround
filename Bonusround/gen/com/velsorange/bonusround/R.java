@@ -14,7 +14,11 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int fel=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int le=0x7f020002;
+        public static final int ment=0x7f020003;
+        public static final int uj=0x7f020004;
     }
     public static final class id {
         public static final int edit_name=0x7f08000e;
@@ -24,19 +28,29 @@ public final class R {
         public static final int gomb=0x7f080011;
         public static final int jelszo=0x7f08000a;
         public static final int jelszo2=0x7f08000b;
+        public static final int karutfel=0x7f080014;
+        public static final int karutle=0x7f080015;
+        public static final int karutlist=0x7f080016;
+        public static final int karutment=0x7f080017;
+        public static final int karutszoveg=0x7f080013;
+        public static final int karutuj=0x7f080018;
+        public static final int kiszereles=0x7f080019;
+        public static final int lathato=0x7f08001a;
+        public static final int lathatok=0x7f08001b;
         public static final int lbl_your_name=0x7f08000f;
         public static final int login=0x7f080007;
         public static final int login_form=0x7f080004;
         public static final int login_status=0x7f080002;
         public static final int login_status_message=0x7f080003;
         public static final int loginj=0x7f080006;
-        public static final int menu_forgot_password=0x7f080013;
-        public static final int menu_settings=0x7f080012;
+        public static final int menu_forgot_password=0x7f08001d;
+        public static final int menu_settings=0x7f08001c;
         public static final int pager=0x7f080000;
         public static final int pager_title_strip=0x7f080001;
         public static final int sign_in_button=0x7f080008;
         public static final int tablaid=0x7f08000d;
         public static final int txt_your_name=0x7f080010;
+        public static final int widget0=0x7f080012;
     }
     public static final class layout {
         public static final int activity_karb=0x7f030000;
@@ -46,6 +60,7 @@ public final class R {
         public static final int activity_uj_felhasznalo=0x7f030004;
         public static final int fomenusor=0x7f030005;
         public static final int fragment_edit_name=0x7f030006;
+        public static final int karban_arut=0x7f030007;
     }
     public static final class menu {
         public static final int activity_karb=0x7f070000;
