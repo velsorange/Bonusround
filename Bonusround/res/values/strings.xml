@@ -13,7 +13,16 @@
         <item>Információk</item>
         <item>Karbantartás</item>
     </string-array>
-
+	<string-array name="country_arrays">
+        <item>Malaysia</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
+    </string-array>
     <string name="title_activity_uj_felhasznalo">Új Felhasználó</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="title_item_list">Items</string>

@@ -9,6 +9,7 @@ package com.velsorange.bonusround;
 
 public final class R {
     public static final class array {
+        public static final int country_arrays=0x7f050001;
         public static final int fomenu=0x7f050000;
     }
     public static final class attr {
@@ -21,6 +22,11 @@ public final class R {
         public static final int uj=0x7f020004;
     }
     public static final class id {
+        public static final int arut=0x7f08001a;
+        public static final int arut_kiszereles=0x7f08001c;
+        public static final int arut_lathato=0x7f08001d;
+        public static final int arut_sorrend=0x7f08001e;
+        public static final int arut_tablaid=0x7f08001b;
         public static final int edit_name=0x7f08000e;
         public static final int email=0x7f080009;
         public static final int fnev=0x7f080005;
@@ -28,23 +34,21 @@ public final class R {
         public static final int gomb=0x7f080011;
         public static final int jelszo=0x7f08000a;
         public static final int jelszo2=0x7f08000b;
-        public static final int karutfel=0x7f080014;
-        public static final int karutle=0x7f080015;
-        public static final int karutlist=0x7f080016;
-        public static final int karutment=0x7f080017;
+        public static final int karutkiszereles=0x7f080017;
+        public static final int karutlathato=0x7f080014;
+        public static final int karutlathatok=0x7f080018;
+        public static final int karutlist=0x7f080015;
+        public static final int karutment=0x7f080016;
         public static final int karutszoveg=0x7f080013;
-        public static final int karutuj=0x7f080018;
-        public static final int kiszereles=0x7f080019;
-        public static final int lathato=0x7f08001a;
-        public static final int lathatok=0x7f08001b;
+        public static final int karutuj=0x7f080019;
         public static final int lbl_your_name=0x7f08000f;
         public static final int login=0x7f080007;
         public static final int login_form=0x7f080004;
         public static final int login_status=0x7f080002;
         public static final int login_status_message=0x7f080003;
         public static final int loginj=0x7f080006;
-        public static final int menu_forgot_password=0x7f08001d;
-        public static final int menu_settings=0x7f08001c;
+        public static final int menu_forgot_password=0x7f080020;
+        public static final int menu_settings=0x7f08001f;
         public static final int pager=0x7f080000;
         public static final int pager_title_strip=0x7f080001;
         public static final int sign_in_button=0x7f080008;
@@ -61,6 +65,7 @@ public final class R {
         public static final int fomenusor=0x7f030005;
         public static final int fragment_edit_name=0x7f030006;
         public static final int karban_arut=0x7f030007;
+        public static final int karban_arut_sor=0x7f030008;
     }
     public static final class menu {
         public static final int activity_karb=0x7f070000;

@@ -94,33 +94,6 @@ public class MainActivity extends ListActivity {
 		} else {
 			c = dbHelper.fetchFoMenu(dbHelper.getUserId(nev));
 		}
-
-		/*
-		 * if (admin.compareTo("true") == 0) { values = new String[] {
-		 * "Bónuszkör", "Vételezés", "Standolás", "Hitel", "Költség", "Bevétel",
-		 * "Információk", "Karbantartás", "Kijelentkezés", "Kilépés" }; } else
-		 * if (nev == "Nincs bejelentkezve") { values = new String[] {
-		 * "Bejelenkezés", "Kilépés" };
-		 * 
-		 * } else if (nev == "Nincs felhasználó") { values = new String[] {
-		 * "Új felhasználó", "Kilépés" };
-		 * 
-		 * } else if (admin.compareTo("false") == 0) { String s="\"Bónuszkör\"";
-		 * int db=3; if (vetelezes=="true"){ db++; } if (standolas=="true"){
-		 * db++; } db++; if (koltseg=="true"){ db++; } if (bevetel=="true"){
-		 * db++; } if (informaciok=="true"){ db++; } values = new String[db];
-		 * values[0]="Bónuszkör"; values[db-1]="Kilépés";
-		 * values[db-2]="Kijelentkezés"; db=0; if (vetelezes=="true"){ db++;
-		 * values[db]="Vételezés"; } if (standolas=="true"){ db++;
-		 * values[db]="Standolás"; } db++; values[db]="Hitel"; if
-		 * (koltseg=="true"){ db++; values[db]="Költség"; } if
-		 * (bevetel=="true"){ db++; values[db]="Bevétel"; } if
-		 * (informaciok=="true"){ db++; values[db]="Információk"; }
-		 * 
-		 * values = new String[] { "Bónuszkör", "Vételezés", "Standolás",
-		 * "Hitel", "Költség", "Kijelentkezés", "Kilépés" }; }
-		 */
-
 		if (c == null) {
 
 		} else {

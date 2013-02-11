@@ -26,7 +26,9 @@ public class DbAdapter {
 	public static final String ARUT_KEY_LATHATO = "lathato";
 	public static final String ARUT_KEY_KISZERELES = "kiszereles";
 	public static final String ARUT_KEY_USER_ID = "user_id";
-
+	public static final String ARUT_KEY_SORREND = "sorrend";
+	public static final String ARUT_WHERE_LATHATO_TRUE= ARUT_KEY_LATHATO + " like 'igen'";
+	public static final String ARUT_WHERE_LATHATO_FALSE= ARUT_KEY_LATHATO + " like 'nem'";
 	// ******************Áru tábla konstansok ********************//
 	public static final String TABLA_ARU = "aru";
 	public static final String ARU_KEY_ROWID = "_id";
@@ -242,7 +244,8 @@ public class DbAdapter {
 			+ ARUT_KEY_LATHATO
 			+ " text, "
 			+ ARUT_KEY_KISZERELES
-			+ " text, " + ARUT_KEY_USER_ID + " integer);";
+			+ " text, " + ARUT_KEY_USER_ID + " integer, "
+			+ ARUT_KEY_SORREND + " integer);";
 	public static final String DATABASE_CREATE_ARU = "CREATE TABLE if not exists "
 			+ TABLA_ARU
 			+ " ("
@@ -646,12 +649,13 @@ public class DbAdapter {
 	}
 
 	public long createArut(String megnevezes, String lathato,
-			String kiszereles, int user_id) {
+			String kiszereles, int user_id, int sorrend) {
 		ContentValues ertek = new ContentValues();
 		ertek.put(ARUT_KEY_MEGNEVEZES, megnevezes);
 		ertek.put(ARUT_KEY_LATHATO, lathato);
 		ertek.put(ARUT_KEY_KISZERELES, kiszereles);
 		ertek.put(ARUT_KEY_USER_ID, user_id);
+		ertek.put(ARUT_KEY_SORREND, sorrend);
 		return mDb.insert(TABLA_ARUT, null, ertek);
 	}
 
@@ -1095,8 +1099,27 @@ public class DbAdapter {
 		return c;
 	}
 
-	// public static final String FOMENU_WHERE = MENU_KEY_MENUT
-	// + " like 'fomenu' AND " + MENU_KEY_USER_ID + " like '";
+	public Cursor fetchArut(boolean lathato){
+		Cursor mCursor =null;
+		if (lathato) {
+			mCursor=mDb.query(TABLA_ARUT, new String[] {ARUT_KEY_ROWID,ARUT_KEY_MEGNEVEZES,
+					ARUT_KEY_LATHATO,ARUT_KEY_KISZERELES,ARUT_KEY_SORREND}, ARUT_WHERE_LATHATO_TRUE,
+					null, null, null, ARUT_KEY_SORREND);
+			
+		}
+		else{
+			mCursor=mDb.query(TABLA_ARUT, new String[] {ARUT_KEY_ROWID,ARUT_KEY_MEGNEVEZES,
+					ARUT_KEY_LATHATO,ARUT_KEY_KISZERELES,ARUT_KEY_SORREND}, ARUT_WHERE_LATHATO_FALSE,
+					null, null, null, ARUT_KEY_SORREND);
+			
+		}
+		if (mCursor != null) {
+			mCursor.moveToFirst();
+		}
+		return mCursor;
+	}
+	
+	
 	public Cursor fetchFoMenu(int user_id) {
 
 		Log.w(TAG, "fetchFõmenü, mCursor példányosítása elõtt");
@@ -1110,7 +1133,8 @@ public class DbAdapter {
 		}
 		return mCursor;
 	}
-
+	
+	
 	public int getUserId(String user) {
 		Cursor mCursor = null;
 		mCursor = mDb.query(TABLA_FELHASZNALO, new String[] { FELHASZNALO_KEY_ROWID,
@@ -1125,7 +1149,18 @@ public class DbAdapter {
 		}
 		return 0;
 	}
-
+	public int countArut() {
+		Cursor mCursor = null;
+		mCursor = mDb.rawQuery("select count(*) from aru_tipus", null);
+		Log.w(TAG, mCursor.toString());
+		if (mCursor != null) {
+			if (mCursor.getCount()==0){}
+			else{
+			mCursor.moveToFirst();
+			return mCursor.getInt(0);}
+		}
+		return 0;
+	}
 	public void createMenuRendszer(int user_id) {
 		Cursor mCursor = mDb.query(TABLA_MENU, new String[] { MENU_KEY_MENU,
 				MENU_KEY_USER_ID }, FOMENU_WHERE + user_id + "'", null, null,
