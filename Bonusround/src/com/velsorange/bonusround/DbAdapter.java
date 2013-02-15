@@ -942,7 +942,42 @@ public class DbAdapter {
 		ertek.put(MENU_KEY_USER_ID, user_id);
 		return mDb.insert(TABLA_MENU, null, ertek);
 	}
+	/*
+	public static final String TABLA_ARUT = "aru_tipus";
+	public static final String ARUT_KEY_ROWID = "_id";
+	public static final String ARUT_KEY_MEGNEVEZES = "megnevezes";
+	public static final String ARUT_KEY_LATHATO = "lathato";
+	public static final String ARUT_KEY_KISZERELES = "kiszereles";
+	public static final String ARUT_KEY_USER_ID = "user_id";
+	public static final String ARUT_KEY_SORREND = "sorrend";
+	public static final String ARUT_WHERE_LATHATO_TRUE= ARUT_KEY_LATHATO + " like 'igen'";
+	public static final String ARUT_WHERE_LATHATO_FALSE= ARUT_KEY_LATHATO + " like 'nem'";
+	*/
+	public boolean updateArut(int id, String megnevezes,String lathato,String kiszereles)
+	{
+		int u=0;
+		ContentValues args = new ContentValues();
+		args.put(ARUT_KEY_MEGNEVEZES, megnevezes);
+		args.put(ARUT_KEY_LATHATO, lathato);
+		args.put(ARUT_KEY_KISZERELES, kiszereles);
+		u=mDb.update(TABLA_ARUT, args, ARUT_KEY_ROWID+"="+id, null);
+		return u>0;
+	}
 
+	public boolean updateArutSorrend(int id, int sorrend)
+	{
+		int u=0;
+		ContentValues args = new ContentValues();
+		args.put(ARUT_KEY_SORREND, sorrend);
+		u=mDb.update(TABLA_ARUT, args, ARUT_KEY_ROWID+"="+id, null);
+		return u>0;
+	}
+	public boolean deleteArut(int id)
+	{
+		int del=0;
+		del=mDb.delete(TABLA_ARUT, ARUT_KEY_ROWID+"="+id, null);
+		return del>0;
+	}
 	public boolean deleteAllArut() {
 		int del = 0;
 		del = mDb.delete(TABLA_ARUT, null, null);

@@ -15,12 +15,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -28,6 +32,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -237,6 +243,7 @@ public class Karbantartas extends FragmentActivity {
 		public static final String ARG_SECTION_NUMBER = "section_number";
 		private Cursor arut = null;
 		private boolean ujj = true;
+		private String id = "";
 		private String lat = "";
 		private String szov = "";
 		private String kisz = "";
@@ -246,6 +253,8 @@ public class Karbantartas extends FragmentActivity {
 		private SimpleCursorAdapter dataAdapter;
 		private ListView listView;
 		Spinner kiszereles;
+		EditText szoveg;
+		Switch lathatok;
 		String[] columns;
 		int[] to;
 
@@ -258,14 +267,37 @@ public class Karbantartas extends FragmentActivity {
 
 			final View V = inflater.inflate(R.layout.karban_arut, container,
 					false);
+			szoveg = (EditText) V.findViewById(R.id.karutszoveg);
+			szoveg.setInputType(InputType.TYPE_NULL);
+
+		    szoveg.setOnTouchListener(new View.OnTouchListener() {
+		    	@Override
+		    	public boolean onTouch(View v, MotionEvent event) {
+		        szoveg.setInputType(InputType.TYPE_CLASS_TEXT);
+		        szoveg.onTouchEvent(event); // call native handler
+		        return true; // consume touch even
+		        }
+
+				 
+		    });
+			szoveg.addTextChangedListener(new TextWatcher() {
+			    public void afterTextChanged(Editable s) {}
+			    public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+			    public void onTextChanged(CharSequence s, int start, int before, int count){
+			        if(s != null && s.length() > 0 && szoveg.getError() != null) {
+			            szoveg.setError(null);
+			        }
+			    }
+			}); 
 			listView = (ListView) V.findViewById(R.id.karutlist);
+			
 			ImageButton uj = (ImageButton) V.findViewById(R.id.karutuj);
 			uj.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
-					EditText szoveg = (EditText) V
-							.findViewById(R.id.karutszoveg);
+					ujj = true;
+					szoveg = (EditText) V.findViewById(R.id.karutszoveg);
 					szoveg.setText("");
 					CheckBox lathato = (CheckBox) V
 							.findViewById(R.id.karutlathato);
@@ -280,8 +312,8 @@ public class Karbantartas extends FragmentActivity {
 			list.add("db");
 			list.add("kg");
 
-			final ArrayAdapter<String> aa = new ArrayAdapter<String>(getActivity(),
-					android.R.layout.simple_spinner_item, list);
+			final ArrayAdapter<String> aa = new ArrayAdapter<String>(
+					getActivity(), android.R.layout.simple_spinner_item, list);
 			aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			kiszereles.setAdapter(aa);
 			ImageButton ment = (ImageButton) V.findViewById(R.id.karutment);
@@ -289,36 +321,54 @@ public class Karbantartas extends FragmentActivity {
 
 				@Override
 				public void onClick(View arg0) {
-					EditText szoveg = (EditText) V
-							.findViewById(R.id.karutszoveg);
-					szov = szoveg.getText().toString();
-					CheckBox lathato = (CheckBox) V
-							.findViewById(R.id.karutlathato);
-					if (lathato.isChecked())
-						lat = "igen";
-					else
-						lat = "nem";
-					kisz = String.valueOf(kiszereles.getSelectedItem());
-					sorr = MainActivity.dbHelper.countArut() + 1;
-					if (ujj){
-						sorr = MainActivity.dbHelper.countArut() + 1;
+					szoveg = (EditText) V.findViewById(R.id.karutszoveg);
 
-						MainActivity.dbHelper.createArut(szov, lat, kisz,
-								MainActivity.dbHelper.getUserId(nev), sorr);
+					szov = szoveg.getText().toString();
+					if (szov.isEmpty()) {
+						szoveg.requestFocus();
+						szoveg.setError("Kötelezõ mezõ!");
+					} else {
+						CheckBox lathato = (CheckBox) V
+								.findViewById(R.id.karutlathato);
+						if (lathato.isChecked())
+							lat = "igen";
+						else
+							lat = "nem";
+						kisz = String.valueOf(kiszereles.getSelectedItem());
+						if (ujj) {
+							sorr = MainActivity.dbHelper.countArut() + 1;
+
+							MainActivity.dbHelper.createArut(szov, lat, kisz,
+									MainActivity.dbHelper.getUserId(nev), sorr);
+						} else {
+							MainActivity.dbHelper.updateArut(
+									Integer.parseInt(id), szov, lat, kisz);
+						}
+						arut = MainActivity.dbHelper.fetchArut(lathatok
+								.isChecked());
+						dataAdapter = new SimpleCursorAdapter(getActivity(),
+								R.layout.karban_arut_sor, arut, columns, to, 0);
+
+						// Assign adapter to ListView
+						listView.setAdapter(dataAdapter);
 					}
-					arut = MainActivity.dbHelper.fetchArut(true);
+				}
+			});
+
+			lathatok = (Switch) V.findViewById(R.id.karutlathatok);
+			lathatok.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+				@Override
+				public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+
+					arut = MainActivity.dbHelper.fetchArut(arg1);
 					dataAdapter = new SimpleCursorAdapter(getActivity(),
 							R.layout.karban_arut_sor, arut, columns, to, 0);
-
-					// Assign adapter to ListView
 					listView.setAdapter(dataAdapter);
 
 				}
 			});
-
-			Switch lathatok = (Switch) V.findViewById(R.id.karutlathatok);
-
-			arut = MainActivity.dbHelper.fetchArut(true);
+			arut = MainActivity.dbHelper.fetchArut(lathatok.isChecked());
 			columns = new String[5];
 			columns[0] = DbAdapter.ARUT_KEY_ROWID;
 			columns[1] = DbAdapter.ARUT_KEY_MEGNEVEZES;
@@ -342,30 +392,40 @@ public class Karbantartas extends FragmentActivity {
 
 			// Assign adapter to ListView
 			listView.setAdapter(dataAdapter);
-			listView.setOnItemClickListener(new OnItemClickListener(){
+			listView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					Cursor cursor = (Cursor) listView.getItemAtPosition(arg2);
-						 
-						   ujj=false;
-						   
-						   String arutipus = 
-						    cursor.getString(cursor.getColumnIndexOrThrow("megnevezes"));
-						   EditText szoveg = (EditText) V
-									.findViewById(R.id.karutszoveg);
-						   szoveg.setText(arutipus);
-						   CheckBox lathato = (CheckBox) V
-									.findViewById(R.id.karutlathato);
-						   if (cursor.getString(cursor.getColumnIndexOrThrow("lathato")).compareTo("igen"))
-						   {}
-						   String item = cursor.getString(cursor.getColumnIndexOrThrow("kiszereles"));
-						   kiszereles.setSelection(aa.getPosition(item));
-						   Toast.makeText(getActivity().getApplication() ,
-						     arutipus, Toast.LENGTH_SHORT).show();
-					
-				}});
+
+					ujj = false;
+					id = cursor.getString(cursor
+							.getColumnIndexOrThrow(DbAdapter.ARUT_KEY_ROWID));
+					String arutipus = cursor.getString(cursor
+							.getColumnIndexOrThrow("megnevezes"));
+					EditText szoveg = (EditText) V
+							.findViewById(R.id.karutszoveg);
+					szoveg.setText(arutipus);
+					CheckBox lathato = (CheckBox) V
+							.findViewById(R.id.karutlathato);
+					if (cursor.getString(
+							cursor.getColumnIndexOrThrow("lathato")).compareTo(
+							"igen") == 0) {
+						lathato.setChecked(true);
+					} else if (cursor.getString(
+							cursor.getColumnIndexOrThrow("lathato")).compareTo(
+							"nem") == 0) {
+						lathato.setChecked(false);
+					}
+					String item = cursor.getString(cursor
+							.getColumnIndexOrThrow("kiszereles"));
+					kiszereles.setSelection(aa.getPosition(item));
+					Toast.makeText(getActivity().getApplication(), arutipus,
+							Toast.LENGTH_SHORT).show();
+
+				}
+			});
 			return V;
 		}
 

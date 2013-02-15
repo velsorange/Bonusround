@@ -45,7 +45,7 @@ public class LoginActivity extends FragmentActivity implements
 	String adminertek = "";
 	int result;
 	private String s;
-	private String key="";
+	private String key = "";
 
 	private void showEditDialog() {
 		FragmentManager fm = getSupportFragmentManager();
@@ -64,8 +64,9 @@ public class LoginActivity extends FragmentActivity implements
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (key.compareTo("")==0){
-		showEditDialog();}
+		if (key.compareTo("") == 0) {
+			showEditDialog();
+		}
 	}
 
 	@Override
@@ -78,7 +79,7 @@ public class LoginActivity extends FragmentActivity implements
 		} else {
 			key = inputText;
 			// s a filepath itt kell encrpytálni
-			
+
 			Toast.makeText(this, "Hi, " + inputText, Toast.LENGTH_SHORT).show();
 		}
 	}
@@ -275,7 +276,7 @@ public class LoginActivity extends FragmentActivity implements
 										"A felhasználónév és/vagy a jelszó nem egyezik",
 										Toast.LENGTH_LONG).show();
 								mEmailView
-								.setError(getString(R.string.error_login));
+										.setError(getString(R.string.error_login));
 								mEmailView.setText("");
 								mPasswordView.setText("");
 								mEmailView.requestFocus();
@@ -290,8 +291,7 @@ public class LoginActivity extends FragmentActivity implements
 					} while (c.moveToNext());
 					if (!b) {
 
-						mEmailView
-						.setError(getString(R.string.error_login));
+						mEmailView.setError(getString(R.string.error_login));
 						Toast.makeText(
 								this,
 								"A felhasználónév és/vagy a jelszó nem egyezik",
