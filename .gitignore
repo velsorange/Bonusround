@@ -1,14 +1,14 @@
 # built application files
 
 
-files for the dex VM
+# files for the dex VM
 
 
- Java class files
+# Java class files
 
 
- generated files
+# generated files
 
-Local configuration file (sdk path, etc)
+# Local configuration file (sdk path, etc)
 
-Eclipse project files
+# Eclipse project files
